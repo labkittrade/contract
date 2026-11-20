@@ -1,0 +1,25 @@
+{
+  "name": "labkit-cranker",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "crank": "tsx src/index.ts",
+    "oracle": "tsx src/index.ts oracle --cluster localnet",
+    "negative-test": "tsx src/negative-test.ts",
+    "local-test": "tsx src/local-test.ts",
+    "raydium-test": "tsx src/raydium-test.ts",
+    "typecheck": "tsc --noEmit",
+    "graduate": "tsx src/graduate.ts"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "0.30.1",
+    "@solana/spl-token": "0.4.14",
+    "@solana/web3.js": "1.98.4"
+  },
+  "devDependencies": {
+    "@types/node": "24.5.2",
+    "tsx": "4.20.6",
+    "typescript": "5.9.2"
+  }
+}

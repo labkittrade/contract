@@ -1,0 +1,27 @@
+[toolchain]
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+labkit = "133fUn4mjvLVKoe6oR7BWwAiF4qtFgmkg35BdegqgMG3"
+
+[programs.devnet]
+labkit = "133fUn4mjvLVKoe6oR7BWwAiF4qtFgmkg35BdegqgMG3"
+
+[programs.mainnet]
+labkit = "133fUn4mjvLVKoe6oR7BWwAiF4qtFgmkg35BdegqgMG3"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Localnet"
+wallet = "~/.config/solana/id.json"
+
+[workspace]
+members = ["programs/labkit"]
+
+[scripts]
+test = "cargo test --manifest-path programs/labkit/Cargo.toml -- --nocapture"

@@ -1,0 +1,32 @@
+[package]
+name = "labkit"
+version = "0.1.0"
+description = "Launchpad kits and fee routing for Raydium LaunchLab"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/labkittrade/contract"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "labkit"
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+custom-heap = []
+custom-panic = []
+anchor-debug = []
+# Targets the devnet LaunchLab deployment instead of mainnet.
+devnet = []
+# Draws every 20 seconds instead of daily, and Floor's high rises per 2 seconds instead
+# of per hour. Local testing only.
+local-timing = []
+
+[dependencies]
+anchor-lang = { version = "0.30.1", features = ["init-if-needed"] }
+anchor-spl = { version = "0.30.1", features = ["token_2022"] }
+solana-security-txt = "1.1.3"
