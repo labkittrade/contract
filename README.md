@@ -80,22 +80,25 @@ Features:
 
 `Cargo.lock` pins a few crates (see `Cargo.toml`) so Anchor 0.30.1 builds.
 
+The verified mainnet build uses the classic SBF format (v0). Newer Solana CLIs default to a newer format, so to test locally what mainnet runs, build with `cargo build-sbf --manifest-path programs/labkit/Cargo.toml --arch v0`.
+
 `cranker/idl/raydium_launchpad.json` is the LaunchLab IDL from mainnet (`anchor idl fetch LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj --provider.cluster mainnet`). LabKit reads a few LaunchLab and CPMM account fields at fixed offsets (`programs/labkit/src/launchlab.rs`, `cpmm.rs`), so a layout change in either program would need an update here.
 
 ## Verifying the deployed program
 
-The mainnet program is built with [`solana-verify`](https://github.com/Ellipsis-Labs/solana-verifiable-build), so anyone can rebuild it from this repository and compare hashes:
+The mainnet program is built with [`solana-verify`](https://github.com/Ellipsis-Labs/solana-verifiable-build) in the `solanafoundation/solana-verifiable-build:4.3.0` image, so anyone can rebuild it from this repository and compare hashes:
 
 ```bash
 solana-verify verify-from-repo -u https://api.mainnet-beta.solana.com \
   --program-id 133fUn4mjvLVKoe6oR7BWwAiF4qtFgmkg35BdegqgMG3 \
+  --base-image solanafoundation/solana-verifiable-build:4.3.0 \
   https://github.com/labkittrade/contract --library-name labkit
 ```
 
 Or by hand, with Docker running:
 
 ```bash
-solana-verify build --library-name labkit
+solana-verify build --library-name labkit --base-image solanafoundation/solana-verifiable-build:4.3.0
 solana-verify get-executable-hash target/deploy/labkit.so
 solana-verify get-program-hash -u https://api.mainnet-beta.solana.com 133fUn4mjvLVKoe6oR7BWwAiF4qtFgmkg35BdegqgMG3
 ```
